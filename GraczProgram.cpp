@@ -106,11 +106,20 @@ int main(int argc, char* argv[])
 	}
 
 	// Okreslanie rozkazow
-	fstream rozkazyFile(argv[3]);
-	if (rozkazyFile.is_open() != true)
+	fstream rozkazyFile;
+	if (argc > 3)
+	{
+		rozkazyFile.open(argv[3]);
+		if (rozkazyFile.is_open() != true)
+		{
+			rozkazyFile.open("rozkazy.txt", ios::out);
+		}
+	}
+	else
 	{
 		rozkazyFile.open("rozkazy.txt", ios::out);
 	}
+	
 	// Budowanie
 	if (bazaSProd.back() == '0')    // jesli baza nic nie produkuje; 0 na koncu statusu bazy okresla brak produkcji
 	{
